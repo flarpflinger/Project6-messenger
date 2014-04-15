@@ -244,7 +244,7 @@ public class MessengerMain extends javax.swing.JFrame implements Runnable {
             while(true){
               input = in.readLine();
               int command = Integer.parseInt(input.substring(0, 1));
-              String username = input.substring(1,input.length() - 1);
+              String username = input.substring(2);
               
               switch(command){
                   case 4:
