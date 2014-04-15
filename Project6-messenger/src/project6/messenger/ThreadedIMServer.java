@@ -14,7 +14,7 @@ public class ThreadedIMServer
 
 
   public ThreadedIMServer() {
-    super(4225, 0);
+    super(4220, 0);
   }
 
   public static void main(String[] args) {

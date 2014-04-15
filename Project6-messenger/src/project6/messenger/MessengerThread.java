@@ -10,19 +10,19 @@ import java.net.Socket;
  *
  * @author Nate H
  */
-
-public class ServerConnectionThread extends Thread {
+public class MessengerThread extends Thread {
     
     private Socket mySocket;
     
-    public ServerConnectionThread(Runnable serverObject, Socket s) {
+    public MessengerThread(Runnable serverObject, Socket s){
         super(serverObject);
         mySocket = s;
     }
-    
-    public Socket getSocket(){
+
+    public Socket getSocket() {
         return mySocket;
     }
+    
     
     
 }
