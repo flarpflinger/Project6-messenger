@@ -23,6 +23,7 @@ public class ThreadedIMServer
   public ThreadedIMServer() {
     super(4220, 0);
     activeUsers = new ArrayList();
+    usernames = new ArrayList();
 
   }
 
