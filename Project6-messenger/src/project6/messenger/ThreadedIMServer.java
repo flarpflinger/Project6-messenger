@@ -21,8 +21,9 @@ public class ThreadedIMServer
     private ArrayList<String> usernames;
 
   public ThreadedIMServer() {
-    super(4225, 0);
+    super(4220, 0);
     activeUsers = new ArrayList();
+
   }
 
   public static void main(String[] args) {
