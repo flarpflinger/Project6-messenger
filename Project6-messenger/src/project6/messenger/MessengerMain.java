@@ -153,7 +153,6 @@ public class MessengerMain extends javax.swing.JFrame implements Runnable {
         
         String username = (String) jList1.getSelectedValue().toString();
         System.out.println("username: " + username);
-        this.chatButton.setText(username);
         dialog.setUsername(username);
         this.activeBuddies.put(username, dialog);
         dialog.setVisible(true);
@@ -320,7 +319,16 @@ public class MessengerMain extends javax.swing.JFrame implements Runnable {
               
               switch(command){
                   case 3:
-                      activeBuddies.get(username).handleMessage(input);
+                      
+                      MessengerDialog md = activeBuddies.get(username);
+                      if (md == null){
+                            md = new MessengerDialog(this, false);
+                            
+                            md.setUsername(username);
+                            this.activeBuddies.put(username, md);
+                            md.setVisible(true);
+                      }
+                      md.handleMessage(input);
                       break;
                   case 4:
                       buddies.add(username);

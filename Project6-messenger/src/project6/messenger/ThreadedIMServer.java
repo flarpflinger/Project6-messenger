@@ -96,37 +96,38 @@ public class ThreadedIMServer
           
           while(true){
               input = in.readLine();
-              int command = Integer.parseInt(input.substring(0, 1));
-              System.out.println(input);
-              switch(command){
-                  case 0:
-                      System.out.println("create login");
-                      createLogin(input);
-                      break;
-                  case 2:
-                      System.out.println("logoff");
-                      String inputUsername = input.substring(2);
-                      broadcast("5 " + inputUsername);
-                      int index = usernames.indexOf(inputUsername);
-                      activeUsers.remove(index);
-                      usernames.remove(index);
-                      break;
-                  case 3:
-                      System.out.println("message recevied");
-                      int endSender = input.indexOf(' ', 2);
-                      String senderUsername = input.substring(2, endSender);
-                      int endRecpt = input.indexOf(' ', endSender + 1);
-                      String recptUsername = input.substring(endSender + 1, endRecpt);
-                      System.out.println(recptUsername);
-                      int indexMessage = usernames.indexOf(recptUsername);
-                      Socket s = activeUsers.get(indexMessage);
-                      try {
-                        PrintWriter sOut = new PrintWriter(s.getOutputStream(), true);
-                        sOut.println(input);
-                      } catch (IOException ex) {
-                          Logger.getLogger(MessengerMain.class.getName()).log(Level.SEVERE, null, ex);
-                      }
-                      break;
+
+                int command = Integer.parseInt(input.substring(0, 1));
+                System.out.println(input);
+                switch(command){
+                    case 0:
+                        System.out.println("create login");
+                        createLogin(input);
+                        break;
+                    case 2:
+                        System.out.println("logoff");
+                        String inputUsername = input.substring(2);
+                        broadcast("5 " + inputUsername);
+                        int index = usernames.indexOf(inputUsername);
+                        activeUsers.remove(index);
+                        usernames.remove(index);
+                        break;
+                    case 3:
+                        System.out.println("message recevied");
+                        int endSender = input.indexOf(' ', 2);
+                        String senderUsername = input.substring(2, endSender);
+                        int endRecpt = input.indexOf(' ', endSender + 1);
+                        String recptUsername = input.substring(endSender + 1, endRecpt);
+                        System.out.println(recptUsername);
+                        int indexMessage = usernames.indexOf(recptUsername);
+                        Socket s = activeUsers.get(indexMessage);
+                        try {
+                          PrintWriter sOut = new PrintWriter(s.getOutputStream(), true);
+                          sOut.println(input);
+                        } catch (IOException ex) {
+                            Logger.getLogger(MessengerMain.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                        break;
               }
           }
       } catch (IOException ex) {
