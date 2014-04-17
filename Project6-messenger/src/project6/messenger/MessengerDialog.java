@@ -4,11 +4,14 @@
  */
 package project6.messenger;
 
+import java.awt.Label;
+
 /**
  *
  * @author Nate H
  */
 public class MessengerDialog extends javax.swing.JDialog {
+    private String buddyUsername;
 
     /**
      * Creates new form MessengerDialog
@@ -37,6 +40,7 @@ public class MessengerDialog extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
+        messageTextArea.setEditable(false);
         messageTextArea.setColumns(20);
         messageTextArea.setRows(5);
         jScrollPane1.setViewportView(messageTextArea);
@@ -48,6 +52,11 @@ public class MessengerDialog extends javax.swing.JDialog {
         jLabel1.setText("Enter message:");
 
         sendMessage.setText("Send Message");
+        sendMessage.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sendMessageActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -96,6 +105,10 @@ public class MessengerDialog extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void sendMessageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendMessageActionPerformed
+        ((MessengerMain)this.getParent()).sendMessage("poop", buddyUsername);
+    }//GEN-LAST:event_sendMessageActionPerformed
 
     /**
      * @param args the command line arguments
@@ -147,4 +160,12 @@ public class MessengerDialog extends javax.swing.JDialog {
     private javax.swing.JTextArea messageTextArea;
     private javax.swing.JButton sendMessage;
     // End of variables declaration//GEN-END:variables
+
+    void handleMessage(String input) {
+        messageTextArea.add(new Label(input));
+    }
+
+    void setUsername(String buddyUsername) {
+        this.buddyUsername = buddyUsername;
+    }
 }

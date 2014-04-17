@@ -62,15 +62,20 @@ public class ThreadedIMServer
                     String sCurrentLine;
 
                     int indexUsername = input.indexOf(" ", 2);
-                    System.out.println(indexUsername + ".");
+                    //System.out.println(indexUsername + ".");
                     String inputUsername = input.substring(2, indexUsername);
                     String inputPassword = input.substring(indexUsername+ 1);
+                    System.out.println("input: " + inputUsername+"."+inputPassword+".");
                     while ((sCurrentLine = br.readLine()) != null) {
                         int index = sCurrentLine.indexOf(" ");
                         String fileUsername = sCurrentLine.substring(0, index);
-                        String filePassword = sCurrentLine.substring(index);
+                        String filePassword = sCurrentLine.substring(index + 1);
+                        System.out.println(fileUsername + "."+filePassword+".");
                         if(fileUsername.equals(inputUsername) && inputPassword.equals(filePassword)){
+                            System.out.println("out: 6 "+ inputUsername);
                             out.println("6 " + inputUsername);
+                            broadcast("4 "+ inputUsername);
+                            broadcastBuddies("4 " + inputUsername, thisSocket);
                             notLoggedIn = false;
                             activeUsers.add(thisSocket);
                             usernames.add(inputUsername);
@@ -78,6 +83,7 @@ public class ThreadedIMServer
                         }
                     }
                     if(notLoggedIn){
+                        System.out.println("out: 7 " + inputUsername);
                         out.println("7 " + inputUsername);
                     }
 
@@ -109,13 +115,17 @@ public class ThreadedIMServer
                       System.out.println("message recevied");
                       int endSender = input.indexOf(' ', 2);
                       String senderUsername = input.substring(2, endSender);
-                      String recptUsername = input.substring(endSender);
-                      
+                      int endRecpt = input.indexOf(' ', endSender + 1);
+                      String recptUsername = input.substring(endSender + 1, endRecpt);
+                      System.out.println(recptUsername);
                       int indexMessage = usernames.indexOf(recptUsername);
-                      Socket s = activeUsers.remove(indexMessage);
-                      usernames.remove(indexMessage);
-                      //print to socket
-                      //out.println(input);
+                      Socket s = activeUsers.get(indexMessage);
+                      try {
+                        PrintWriter sOut = new PrintWriter(s.getOutputStream(), true);
+                        sOut.println(input);
+                      } catch (IOException ex) {
+                          Logger.getLogger(MessengerMain.class.getName()).log(Level.SEVERE, null, ex);
+                      }
                       break;
               }
           }
@@ -145,7 +155,30 @@ public class ThreadedIMServer
     }
 
     private void broadcast(String string) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        for(Socket currSocket : activeUsers){
+            try {
+                PrintWriter sOut = new PrintWriter(currSocket.getOutputStream(), true);
+                sOut.println(string);
+                System.out.println("Broadcast: " + string);
+            } catch (IOException ex) {
+                Logger.getLogger(MessengerMain.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+
+    private void broadcastBuddies(String string, Socket s) {
+        try {
+            PrintWriter sOut = new PrintWriter(s.getOutputStream(), true);
+            
+            
+            for(String currUsername : usernames){
+                sOut.println("4 " + currUsername);
+                System.out.println("BroadcastBuddies: " + "4 "+currUsername);
+                
+            }
+        }catch (IOException ex) {
+            Logger.getLogger(MessengerMain.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
   
 }
