@@ -41,8 +41,6 @@ public class MessengerLogin extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        passwordText.setText("jPasswordField1");
-
         jLabel1.setText("Username");
 
         jLabel2.setText("Password");

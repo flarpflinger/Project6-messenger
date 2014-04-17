@@ -142,24 +142,25 @@ public class MessengerMain extends javax.swing.JFrame implements Runnable {
     }// </editor-fold>//GEN-END:initComponents
 
     private void chatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chatButtonActionPerformed
-        
         int currIndex = jList1.getSelectedIndex();
         if(currIndex == -1){
             return;
         }
-        MessengerDialog dialog = new MessengerDialog(this, true); 
-        dialog.setVisible(true);
+        MessengerDialog dialog = new MessengerDialog(this, true);
         
         String username = (String) jList1.getSelectedValue().toString();
+        System.out.println("username: " + username);
         this.chatButton.setText(username);
         dialog.setUsername(username);
         this.activeBuddies.put(username, dialog);
+        dialog.setVisible(true);
     }//GEN-LAST:event_chatButtonActionPerformed
 
     private void logoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutButtonActionPerformed
         try {
             PrintWriter out = new PrintWriter(requestSocket.getOutputStream(), true);
-            out.println("7 " + this.uname);
+            out.println("2 " + this.uname);
+            this.dispose();
         } catch (IOException ex) {
             Logger.getLogger(MessengerMain.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -300,6 +301,7 @@ public class MessengerMain extends javax.swing.JFrame implements Runnable {
                       DefaultListModel modelD = new DefaultListModel();
                       jList1.setModel(modelD);
                       modelD.removeElement(username);
+                      break;
                   case 6:
                       System.out.println("successful login");
                       break;
