@@ -365,7 +365,7 @@ public class MessengerMain extends javax.swing.JFrame implements Runnable {
     void sendMessage(String msg, String buddyUsername) {
     try {
             PrintWriter out = new PrintWriter(requestSocket.getOutputStream(), true);
-            out.println(buddyUsername + ": " + msg);
+            out.println("3 "+uname + " " + buddyUsername + " "+ msg);
         } catch (IOException ex) {
             Logger.getLogger(MessengerMain.class.getName()).log(Level.SEVERE, null, ex);
         }
