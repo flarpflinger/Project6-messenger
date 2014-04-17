@@ -329,6 +329,9 @@ public class MessengerMain extends javax.swing.JFrame implements Runnable {
                             
                             md.setUsername(username);
                             this.activeBuddies.put(username, md);
+                            Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+                            md.setLocation(dim.width/2-md.getSize().width/2, dim.height/2-md.getSize().height/2);
+                            md.setTitle("Chat");
                             md.setVisible(true);
                       }
                       md.handleMessage(input);
