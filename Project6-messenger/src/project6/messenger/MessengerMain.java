@@ -150,12 +150,14 @@ public class MessengerMain extends javax.swing.JFrame implements Runnable {
             return;
         }
         MessengerDialog dialog = new MessengerDialog(this, false);
-        
+
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        dialog.setLocation(dim.width/2-dialog.getSize().width/2, dim.height/2-dialog.getSize().height/2);
+        dialog.setTitle("Chat");
         String username = (String) jList1.getSelectedValue().toString();
-        System.out.println("username: " + username);
-        this.chatButton.setText(username);
         dialog.setUsername(username);
         this.activeBuddies.put(username, dialog);
+        jLabel1.setText("Enter message to " + username + ": ");
         dialog.setVisible(true);
     }//GEN-LAST:event_chatButtonActionPerformed
 
@@ -353,7 +355,7 @@ public class MessengerMain extends javax.swing.JFrame implements Runnable {
     void sendMessage(String msg, String buddyUsername) {
     try {
             PrintWriter out = new PrintWriter(requestSocket.getOutputStream(), true);
-            out.println("3 " + this.uname + " " + buddyUsername + " " + msg);
+            out.println(buddyUsername + ": " + msg);
         } catch (IOException ex) {
             Logger.getLogger(MessengerMain.class.getName()).log(Level.SEVERE, null, ex);
         }
