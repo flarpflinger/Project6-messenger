@@ -107,7 +107,9 @@ public class MessengerDialog extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void sendMessageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendMessageActionPerformed
-        ((MessengerMain)this.getParent()).sendMessage("poop", buddyUsername);
+        String msg = this.jTextArea1.getText();
+        this.jTextArea1.setText("");
+        ((MessengerMain)this.getParent()).sendMessage(msg, buddyUsername);
     }//GEN-LAST:event_sendMessageActionPerformed
 
     /**
@@ -162,7 +164,7 @@ public class MessengerDialog extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     void handleMessage(String input) {
-        messageTextArea.add(new Label(input));
+        messageTextArea.append(input);
     }
 
     void setUsername(String buddyUsername) {

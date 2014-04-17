@@ -6,6 +6,9 @@ package project6.messenger;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowStateListener;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -230,6 +233,25 @@ public class MessengerMain extends javax.swing.JFrame implements Runnable {
     private javax.swing.JButton logoutButton;
     // End of variables declaration//GEN-END:variables
 
+
+//    @Override
+//    public synchronized void addWindowStateListener(WindowStateListener l) {
+//        super.addWindowStateListener(l); //To change body of generated methods, choose Tools | Templates.
+//        new WindowAdapter(){
+//            @Override
+//            public void windowClosing(WindowEvent e){
+//                 try {
+//                    PrintWriter out = new PrintWriter(requestSocket.getOutputStream(), true);
+//                    out.println("2 " + uname);
+//                    dispose();
+//                } catch (IOException ex) {
+//                    Logger.getLogger(MessengerMain.class.getName()).log(Level.SEVERE, null, ex);
+//                }
+//
+//            }
+//        };
+//    }
+    
     /**
      * @return the requestSocket
      */
@@ -284,7 +306,17 @@ public class MessengerMain extends javax.swing.JFrame implements Runnable {
             while(true){
               input = in.readLine();
               int command = Integer.parseInt(input.substring(0, 1));
-              String username = input.substring(2);
+
+              String username;
+              int endUsername = input.indexOf(' ', 2);
+              if(endUsername == -1){
+                  username = input.substring(2);
+              }
+              else{
+                  username = input.substring(2, endUsername);
+              }
+                System.out.println(username+".");
+             
               
               switch(command){
                   case 3:
