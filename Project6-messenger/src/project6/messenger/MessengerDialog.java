@@ -169,5 +169,6 @@ public class MessengerDialog extends javax.swing.JDialog {
 
     void setUsername(String buddyUsername) {
         this.buddyUsername = buddyUsername;
+        jLabel1.setText("Enter message to " + buddyUsername + ": ");
     }
 }

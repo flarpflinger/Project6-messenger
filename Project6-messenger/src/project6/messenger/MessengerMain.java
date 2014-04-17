@@ -158,7 +158,6 @@ public class MessengerMain extends javax.swing.JFrame implements Runnable {
 
         dialog.setUsername(username);
         this.activeBuddies.put(username, dialog);
-        jLabel1.setText("Enter message to " + username + ": ");
         dialog.setVisible(true);
     }//GEN-LAST:event_chatButtonActionPerformed
 
