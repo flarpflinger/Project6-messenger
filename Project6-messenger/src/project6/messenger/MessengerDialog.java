@@ -164,7 +164,9 @@ public class MessengerDialog extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     void handleMessage(String input) {
-        messageTextArea.append(this.buddyUsername + ": " + input + '\n');
+        int index = input.lastIndexOf(" ");
+        String msg = input.substring(index+1);
+        messageTextArea.append(this.buddyUsername + ": " + msg + '\n');
     }
 
     void setUsername(String buddyUsername) {
