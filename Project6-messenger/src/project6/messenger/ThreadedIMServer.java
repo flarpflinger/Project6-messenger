@@ -96,7 +96,7 @@ public class ThreadedIMServer
           
           while(true){
               input = in.readLine();
-
+              System.out.println("input:"+input);
                 int command = Integer.parseInt(input.substring(0, 1));
                 System.out.println(input);
                 switch(command){

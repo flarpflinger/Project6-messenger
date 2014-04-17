@@ -155,10 +155,7 @@ public class MessengerMain extends javax.swing.JFrame implements Runnable {
         dialog.setLocation(dim.width/2-dialog.getSize().width/2, dim.height/2-dialog.getSize().height/2);
         dialog.setTitle("Chat");
         String username = (String) jList1.getSelectedValue().toString();
-<<<<<<< HEAD
-        System.out.println("username: " + username);
-=======
->>>>>>> e1e54eaeb80023a20e6fe1bd1b7adcdf04f26aab
+
         dialog.setUsername(username);
         this.activeBuddies.put(username, dialog);
         jLabel1.setText("Enter message to " + username + ": ");
