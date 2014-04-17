@@ -37,7 +37,7 @@ public class MessengerMain extends javax.swing.JFrame implements Runnable {
     
     public MessengerMain() throws UnknownHostException, IOException {
         initComponents();
-        requestSocket = new Socket("localhost", 4220);
+        requestSocket = new Socket("163.11.29.197", 4220);
         buddies = new ArrayList<>();
         message =  new String();
         activeBuddies = new HashMap<String, MessengerDialog>();
@@ -146,7 +146,7 @@ public class MessengerMain extends javax.swing.JFrame implements Runnable {
         if(currIndex == -1){
             return;
         }
-        MessengerDialog dialog = new MessengerDialog(this, true);
+        MessengerDialog dialog = new MessengerDialog(this, false);
         
         String username = (String) jList1.getSelectedValue().toString();
         System.out.println("username: " + username);
