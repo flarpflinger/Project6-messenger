@@ -20,6 +20,7 @@ import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -40,7 +41,8 @@ public class MessengerMain extends javax.swing.JFrame implements Runnable {
     
     public MessengerMain() throws UnknownHostException, IOException {
         initComponents();
-        requestSocket = new Socket("163.11.29.197", 4220);
+        String ip = JOptionPane.showInputDialog(null, "Enter the server IP: ");
+        requestSocket = new Socket(ip, 4220);
         buddies = new ArrayList<>();
         message =  new String();
         activeBuddies = new HashMap<String, MessengerDialog>();
@@ -52,8 +54,8 @@ public class MessengerMain extends javax.swing.JFrame implements Runnable {
         PrintWriter out = new PrintWriter(requestSocket.getOutputStream(), true);
         String pword = new String(p);
         out.println("1 " + u + " " + pword);
-        uname = u;
-        pword = p.toString();
+        this.uname = u;
+        this.pword = p.toString();
         
     }
 
@@ -339,14 +341,23 @@ public class MessengerMain extends javax.swing.JFrame implements Runnable {
                   case 4:
                       buddies.add(username);
                       DefaultListModel model = new DefaultListModel();
+                      
                       jList1.setModel(model);
-                      model.addElement(username);
+                      for(String currBuddy : buddies){
+                          model.addElement(currBuddy);
+                      }
+                      
+                      
+                      
                       break;
                   case 5:
                       buddies.remove(username);
-                      DefaultListModel modelD = new DefaultListModel();
-                      jList1.setModel(modelD);
-                      modelD.removeElement(username);
+                      DefaultListModel model1 = new DefaultListModel();
+                      
+                      jList1.setModel(model1);
+                      for(String currBuddy : buddies){
+                          model1.addElement(currBuddy);
+                      }
                       break;
                   case 6:
                       System.out.println("successful login");
@@ -371,5 +382,14 @@ public class MessengerMain extends javax.swing.JFrame implements Runnable {
         } catch (IOException ex) {
             Logger.getLogger(MessengerMain.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    void createLogin(String uname, char[] pword) throws IOException {
+        PrintWriter out = new PrintWriter(requestSocket.getOutputStream(), true);
+        String p = new String(pword);
+        out.println("0 " + uname + " " + p);
+        
+        this.uname = uname;
+        this.pword = p.toString();
     }
 }

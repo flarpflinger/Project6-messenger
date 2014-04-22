@@ -214,3 +214,4 @@ pip-log.txt
 #Mr Developer
 .mr.developer.cfg
 /Project6-messenger/nbproject/private/
+/messengerServer/nbproject/private/

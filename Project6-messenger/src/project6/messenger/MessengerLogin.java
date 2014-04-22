@@ -38,6 +38,7 @@ public class MessengerLogin extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         loginButton = new javax.swing.JButton();
+        createLogin = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -49,6 +50,13 @@ public class MessengerLogin extends javax.swing.JDialog {
         loginButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 loginButtonActionPerformed(evt);
+            }
+        });
+
+        createLogin.setText("Create Login");
+        createLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                createLoginActionPerformed(evt);
             }
         });
 
@@ -65,7 +73,10 @@ public class MessengerLogin extends javax.swing.JDialog {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
                             .addComponent(jLabel2)
-                            .addComponent(loginButton))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(loginButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(createLogin)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -81,7 +92,9 @@ public class MessengerLogin extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(passwordText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(loginButton)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(loginButton)
+                    .addComponent(createLogin))
                 .addContainerGap(36, Short.MAX_VALUE))
         );
 
@@ -110,6 +123,18 @@ public class MessengerLogin extends javax.swing.JDialog {
         }
         this.setVisible(false);
     }//GEN-LAST:event_loginButtonActionPerformed
+
+    private void createLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createLoginActionPerformed
+        String uname = usernameText.getText();
+        char[] pword = passwordText.getPassword();
+        MessengerMain mainWindow = (MessengerMain)this.getParent();
+        try {
+            mainWindow.createLogin(uname, pword);
+        } catch (IOException ex) {
+            Logger.getLogger(MessengerLogin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        this.setVisible(false);
+    }//GEN-LAST:event_createLoginActionPerformed
 
     /**
      * @param args the command line arguments
@@ -153,6 +178,7 @@ public class MessengerLogin extends javax.swing.JDialog {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton createLogin;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;

@@ -109,6 +109,7 @@ public class MessengerDialog extends javax.swing.JDialog {
     private void sendMessageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendMessageActionPerformed
         String msg = this.jTextArea1.getText();
         this.jTextArea1.setText("");
+        messageTextArea.append("Me: " + msg + '\n');
         ((MessengerMain)this.getParent()).sendMessage(msg, buddyUsername);
     }//GEN-LAST:event_sendMessageActionPerformed
 
@@ -164,8 +165,11 @@ public class MessengerDialog extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     void handleMessage(String input) {
-        int index = input.lastIndexOf(" ");
-        String msg = input.substring(index+1);
+        
+        int firstIndex = input.indexOf(" ");
+        int secondIndex = input.indexOf(" ", firstIndex + 1);
+        int thirdIndex = input.indexOf(" ", secondIndex + 1);
+        String msg = input.substring(thirdIndex+1);
         messageTextArea.append(this.buddyUsername + ": " + msg + '\n');
     }
 
